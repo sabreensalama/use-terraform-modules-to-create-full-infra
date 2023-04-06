@@ -1,0 +1,14 @@
+stages:
+- deploy
+
+deploy:
+  stage: deploy
+  image:
+    name: hashicorp/terraform:latest
+    entrypoint: ['/bin/sh', '-c']
+  variables:
+    AWS_PROFILE: "${CI_COMMIT_BRANCH}"
+  script:
+  - terraform init
+  - terraform plan
+  - terraform apply --auto-approve
