@@ -18,12 +18,12 @@ resource "aws_db_subnet_group" "subnet_group" {
 
 resource "aws_db_instance" "default" {
   allocated_storage    = var.storage
-  db_name              = data.aws_ssm_parameter.db_name.name
+  db_name              = data.aws_ssm_parameter.db_name.value
   engine               = var.engine
   engine_version       = var.engine_version
   instance_class       = var.instance_type
-  username             = data.aws_ssm_parameter.pg_username.name
-  password             = data.aws_ssm_parameter.pg_password.name
+  username             = data.aws_ssm_parameter.pg_username.value
+  password             = data.aws_ssm_parameter.pg_password.value
   skip_final_snapshot  = true
   db_subnet_group_name = aws_db_subnet_group.subnet_group.name
   vpc_security_group_ids = var.sg
