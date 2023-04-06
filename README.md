@@ -5,16 +5,16 @@
 ![alt architecture](https://github.com/sabreensalama/use-terraform-modules-to-create-full-infra/blob/main/diagram.jpeg)
 
 ## componenets:
-1- VPC
-2- 2 private Subnets,2 public subnets
-3- a private ec2 for the application on each ec2
-4- installing the ssm agent on the private ec2s to connect to them privetely
-5- make the private ec2s able to connect to an s3 to upload files into them
-5- make the private ec2 able to connect to postgres db 
-6- trigger a python lambda function by s3 upload event to send notification to sns and an sqs as a subsscriber for sns
-7- load balancer to distribute the traffic to the private ec2
-8- nat gateway to make the private ec2 able to egress to the internet
-7- create a gitlab server to automate the creation of infrastructure
+1. VPC
+2. 2 private Subnets,2 public subnets
+3. a private ec2 for the application on each ec2
+4. installing the ssm agent on the private ec2s to connect to them privetely
+5. make the private ec2s able to connect to an s3 to upload files into them
+5. make the private ec2 able to connect to postgres db 
+6. trigger a python lambda function by s3 upload event to send notification to sns and an sqs as a subsscriber for sns
+7. load balancer to distribute the traffic to the private ec2
+8. nat gateway to make the private ec2 able to egress to the internet
+7. create a gitlab server to automate the creation of infrastructure
 
 # steps to run the code from gitlab
 1- you will have 3 branches with names dev, stage, prod on the repo
