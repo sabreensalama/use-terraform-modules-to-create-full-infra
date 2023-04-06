@@ -7,7 +7,7 @@
 ## componenets:
 1. VPC
 2. 2 private Subnets,2 public subnets
-3. a private ec2 for the application on each ec2
+3. a private ec2 for the application on each subnet
 4. installing the ssm agent on the private ec2s to connect to them privetely
 5. make the private ec2s able to connect to an s3 to upload files into them
 5. make the private ec2 able to connect to postgres db 
