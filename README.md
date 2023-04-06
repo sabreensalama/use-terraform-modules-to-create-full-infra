@@ -43,8 +43,10 @@
 3- in the providers.tf change the profile to match your branch, ex on dev environment profile should be dev
 
 4- run the .gitlab-ci.yml this will deploy all your infra
-   small hint: in remote-backend you will need in the first time to apply  the s3 and dynamodb after creating them uncomment the terraform backend part to enable remote backend
-######################
+ > **_NOTE:_**  in remote-backend you will need in the first time to apply  the s3 and dynamodb after creating them uncomment the terraform backend part to enable remote backend  <br>
+ 
+ > **_NOTE:_**  you may need to install the awscli in your private machines: apt install awscli to send apis to the s3 <br>
+ 
 those steps to depoy the gitlab into an instance ec2 ubuntu(you need to create your ec2 first):
  ```
 sudo apt-get update
