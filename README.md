@@ -1,7 +1,7 @@
 # Create a full infrastructure using terraform modules 
 
 ## Getting started
-this flow to create full infrastructure using the below diagram on multi environments:
+> this flow to create full infrastructure using the below diagram on multi environments:
 ![alt architecture](https://github.com/sabreensalama/use-terraform-modules-to-create-full-infra/blob/main/diagram.jpeg)
 
 ## componenets:
@@ -20,9 +20,9 @@ this flow to create full infrastructure using the below diagram on multi environ
 1- you will have 3 branches with names dev, stage, prod on the repo
 
 2- go to settings > CI/CD > Variables > add variable 
-    the variable will be with key: AWS_SHARED_CREDENTIALS_FILE
-    the variable with a value:
-    ```
+  ```
+    a- the variable will be with key: AWS_SHARED_CREDENTIALS_FILE 
+    b- the variable with a value:
         [dev] 
         aws_access_key_id=<add-your-dev-access-key-id> 
         aws_secret_access_key=<add-your-dev-secret-access-key>
@@ -34,17 +34,19 @@ this flow to create full infrastructure using the below diagram on multi environ
         [prod] 
         aws_access_key_id=<add-your-prod-access-key-id> 
         aws_secret_access_key=<add-your-prod-secret-access-key> 
-        region=<Add-your-region> 
-     ```
+        region=<Add-your-region>   
+     
         
-     the variable with a type: File
+   c- the variable with a type: File
+   ```
 
 3- in the providers.tf change the profile to match your branch, ex on dev environment profile should be dev
 
 4- run the .gitlab-ci.yml this will deploy all your infra
    small hint: in remote-backend you will need in the first time to apply  the s3 and dynamodb after creating them uncomment the terraform backend part to enable remote backend
 ######################
-those steps to depoy the gitlab into an instance ec2 ubuntu:
+those steps to depoy the gitlab into an instance ec2 ubuntu(you need to create your ec2 first):
+ ```
 sudo apt-get update
 sudo apt-get install -y curl openssh-server ca-certificates tzdata perl
 sudo apt-get install -y postfix
@@ -60,6 +62,7 @@ sudo apt-get install gitlab-runner
 sudo gitlab-runner register (here make the executor is a shell)
 sudo systemctl start gitlab-runner.service
 sudo systemctl enable gitlab-runner.service
+ ```
 
 
 
