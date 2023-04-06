@@ -40,12 +40,16 @@
    c- the variable with a type: File
    ```
 
-3- in the providers.tf change the profile to match your branch, ex on dev environment profile should be dev
+3- in the providers.tf change the profile to match your branch, ex on dev environment profile should be dev <br>
+4- you will need to add a three parameters to ssm parameter store with the names /postgres/username, /postgres/password , /postgres/db_name <br>
+  > **_NOTE:_**  go to the SSM Parameters Store console and add a new parameter. Give it a name and set the type to be SecureString. <br>
+  
+5- run the .gitlab-ci.yml this will deploy all your infra
 
-4- run the .gitlab-ci.yml this will deploy all your infra
  > **_NOTE:_**  in remote-backend you will need in the first time to apply  the s3 and dynamodb after creating them uncomment the terraform backend part to enable remote backend  <br>
  
  > **_NOTE:_**  you may need to install the awscli in your private machines: apt install awscli to send apis to the s3 <br>
+ 
  
 those steps to depoy the gitlab into an instance ec2 ubuntu(you need to create your ec2 first):
  ```
