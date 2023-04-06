@@ -1,7 +1,7 @@
 
 
 resource "aws_lambda_function" "get_latest_filename" {
-  filename      = "/Users/ahmeds8/Desktop/Freelacer/full-infrastructure-using-terraform-modules/lambda/lambda_function.py.zip"
+  filename      = "./lambda/lambda_function.py.zip"
   function_name = var.fun_name
   role          = var.lambda_role
   handler       = "lambda_function.lambda_handler"
@@ -12,7 +12,7 @@ resource "aws_lambda_function" "get_latest_filename" {
       SNS_TOPIC_ARN = var.sns_arn
     }
   }
-  source_code_hash = filebase64sha256("/Users/ahmeds8/Desktop/Freelacer/full-infrastructure-using-terraform-modules/lambda/lambda_function.py.zip")
+  source_code_hash = filebase64sha256("./lambda/lambda_function.py.zip")
 }
 
 

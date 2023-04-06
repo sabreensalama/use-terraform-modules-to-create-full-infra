@@ -1,4 +1,4 @@
-data "aws_ssm_parameter" "pg_username" {
+/* data "aws_ssm_parameter" "pg_username" {
   name = "/postgres/username"
 }
 data "aws_ssm_parameter" "pg_password" {
@@ -6,7 +6,7 @@ data "aws_ssm_parameter" "pg_password" {
 }
 data "aws_ssm_parameter" "db_name" {
   name = "/postgres/db_name"
-}
+} */
 resource "aws_db_subnet_group" "subnet_group" {
   name       = "airflow-group"
   subnet_ids = var.subnet_id
@@ -18,13 +18,12 @@ resource "aws_db_subnet_group" "subnet_group" {
 
 resource "aws_db_instance" "default" {
   allocated_storage    = var.storage
-  db_name              = data.aws_ssm_parameter.db_name.value
-  identifier           = var.identifier 
+  db_name              = "airflow_db"
   engine               = var.engine
   engine_version       = var.engine_version
   instance_class       = var.instance_type
-  username             = data.aws_ssm_parameter.pg_username.value
-  password             = data.aws_ssm_parameter.pg_password.value
+  username             = "postgres"
+  password             = "postgres"
   skip_final_snapshot  = true
   db_subnet_group_name = aws_db_subnet_group.subnet_group.name
   vpc_security_group_ids = var.sg

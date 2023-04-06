@@ -5,5 +5,5 @@ module "airflow_lb"{
     sg   = module.alb_sg.sg_id
     subnet_ids = [module.private_subnets.subnet_id[*]]
     port = 80
-    machines_id = [module.airflow-instance.instance_id]
+    machines_id = [module.airflow-instance-1.instance_id,module.airflow-instance-2.instance_id]
 }

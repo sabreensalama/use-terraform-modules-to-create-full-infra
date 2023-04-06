@@ -10,5 +10,4 @@ module "lambda_role"{
     service = "lambda.amazonaws.com"
     managed_policy = ["arn:aws:iam::aws:policy/CloudWatchFullAccess" , "arn:aws:iam::aws:policy/AmazonSNSFullAccess","arn:aws:iam::aws:policy/AmazonS3FullAccess"]
 
-
 }
