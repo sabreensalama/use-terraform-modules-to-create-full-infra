@@ -23,18 +23,18 @@ this flow to create full infrastructure using the below diagram on multi environ
     the variable will be with key: AWS_SHARED_CREDENTIALS_FILE
     the variable with a value:
     ```
-        [dev] <br />
-        aws_access_key_id=<add-your-dev-access-key-id> <br />
-        aws_secret_access_key=<add-your-dev-secret-access-key> <br />
-        region=<Add-your-region> <br />
-        [stage] <br />
-        aws_access_key_id=<add-your-stage-access-key-id> <br />
-        aws_secret_access_key=<add-your-stage-secret-access-key> <br />
-        region=<Add-your-region> <br />
-        [prod] <br />
-        aws_access_key_id=<add-your-prod-access-key-id> <br />
-        aws_secret_access_key=<add-your-prod-secret-access-key> <br />
-        region=<Add-your-region> <br />
+        [dev] 
+        aws_access_key_id=<add-your-dev-access-key-id> 
+        aws_secret_access_key=<add-your-dev-secret-access-key>
+        region=<Add-your-region> 
+        [stage] 
+        aws_access_key_id=<add-your-stage-access-key-id> 
+        aws_secret_access_key=<add-your-stage-secret-access-key> 
+        region=<Add-your-region> 
+        [prod] 
+        aws_access_key_id=<add-your-prod-access-key-id> 
+        aws_secret_access_key=<add-your-prod-secret-access-key> 
+        region=<Add-your-region> 
      ```
         
      the variable with a type: File
