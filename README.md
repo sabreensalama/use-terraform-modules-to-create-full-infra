@@ -49,7 +49,8 @@
  > **_NOTE:_**  in remote-backend you will need in the first time to apply  the s3 and dynamodb after creating them uncomment the terraform backend part to enable remote backend  <br>
  
  > **_NOTE:_**  you may need to install the awscli in your private machines: apt install awscli to send apis to the s3 <br>
- 
+
+> **_NOTE:_** you need to create a key pair manually from the aws console with the name airflow_key before running the Infra pipeline
  
 those steps to depoy the gitlab into an instance ec2 ubuntu(you need to create your ec2 first):
  ```
@@ -69,7 +70,50 @@ sudo gitlab-runner register (here make the executor is a shell)
 sudo systemctl start gitlab-runner.service
 sudo systemctl enable gitlab-runner.service
  ```
+# Extra Part
 
+in the private machines , we need to execute thos commands for ebs:
+```
+    mkdir /ebs-data
+    mkfs -t ext4 /dev/xvdh
+    mount /dev/xvdh /ebs-data
+    chmod -R 777 /ebs-data
+    apt install unzip -y
+```
+> **_NOTE:_**  you need to define some variables for the following pipeline from CICD then variables:
+  - SSH_PRIVATE_KEY 
+      value: <your-pem-airlfow_key_value>
+  - EC2_IPADDRESS
+      value: <ip-of-privat-machine>
+
+for the python pipeline use the below .gitlab-ci.yml:
+```
+stages:
+  - deploy
+
+Deploy: 
+  stage: deploy
+  before_script:
+  - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $EC2_IPADDRESS >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+  -  sudo apt install zip  -y
+  - sudo apt install unzip -y
+   
+  script:
+    - mkdir dags
+    - git clone <your-repo-url> dags
+
+    - zip -r dags.zip .
+    - ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IPADDRESS "test -d "/ebs-data/dags" && echo "Found/Exists" || sudo mkdir /ebs-data/dags"
+    - scp -o StrictHostKeyChecking=no dags.zip ubuntu@$EC2_IPADDRESS:/ebs-data/dags
+    - ssh -o StrictHostKeyChecking=no ubuntu@$EC2_IPADDRESS "cd /ebs-data/dags; unzip dags.zip"
+```
+ > **_NOTE:_**  for git clone you will put your repo url from gitlab like this one http://<gitlab-user>:<gitlab-password>@<gitlab-server-ip>/gitlab-instance-b944c199/<your-repo>.git<br>
 
 
     

@@ -15,3 +15,5 @@ variable "depend_module"{
 variable "ec2_profile"{
 
 }
+
+variable "az"{}
